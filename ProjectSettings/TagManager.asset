@@ -8,6 +8,7 @@ TagManager:
   - Rooms
   - CenterRoom
   - Destroyer
+  - Wall
   layers:
   - Default
   - TransparentFX

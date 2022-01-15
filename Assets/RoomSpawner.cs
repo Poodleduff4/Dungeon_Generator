@@ -18,6 +18,7 @@ public class RoomSpawner : MonoBehaviour
     void Start()
     {
         templates = GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomTemplates>();
+        
         Invoke("Spawn", 0.1f);
         Camera.main.orthographicSize += 1;
     }
@@ -31,25 +32,25 @@ public class RoomSpawner : MonoBehaviour
             {
                 // spawn top door
                 rand = randNumPreferHigh(0, templates.topRooms.Length);
-                Instantiate(templates.topRooms[rand], gameObject.transform.position, templates.topRooms[rand].transform.rotation);
+                CreateRoom(templates.topRooms[rand], gameObject.transform.position, templates.topRooms[rand].transform.rotation);
             }
             else if (openingDirection == 2)
             {
                 // spawn bottom door
                 rand = randNumPreferHigh(0, templates.bottomRooms.Length);
-                Instantiate(templates.bottomRooms[rand], gameObject.transform.position, templates.bottomRooms[rand].transform.rotation);
+                CreateRoom(templates.bottomRooms[rand], gameObject.transform.position, templates.bottomRooms[rand].transform.rotation);
             }
             else if (openingDirection == 3)
             {
                 // spawn left door
                 rand = randNumPreferHigh(0, templates.leftRooms.Length);
-                Instantiate(templates.leftRooms[rand], gameObject.transform.position, templates.leftRooms[rand].transform.rotation);
+                CreateRoom(templates.leftRooms[rand], gameObject.transform.position, templates.leftRooms[rand].transform.rotation);
             }
             else if (openingDirection == 4)
             {
                 // spawn right door
                 rand = randNumPreferHigh(0, templates.rightRooms.Length);
-                Instantiate(templates.rightRooms[rand], gameObject.transform.position, templates.rightRooms[rand].transform.rotation);
+                CreateRoom(templates.rightRooms[rand], gameObject.transform.position, templates.rightRooms[rand].transform.rotation);
             }
             // if(openingDirection == 5)
             // {
@@ -58,6 +59,22 @@ public class RoomSpawner : MonoBehaviour
             spawned = true;
         }
 
+    }
+
+    void CreateRoom(GameObject room, Vector3 pos, Quaternion rotation){
+        GameObject pissballs = Instantiate(room, pos, rotation);
+        int count = pissballs.transform.childCount;
+        // print(pissballs.transform);
+        int spriteIndex = Random.Range(0, templates.sprites.Length);
+        // print(spriteIndex);
+        foreach(Transform child in pissballs.GetComponentsInChildren<Transform>()){
+            // print("Foreach loop: " + child);
+            GameObject obj = child.gameObject;
+            if(obj.tag == "Wall"){
+                child.GetComponent<SpriteRenderer>().sprite = templates.sprites[spriteIndex];
+            }
+        }
+        
     }
 
     int randNumPreferHigh(int low, int high){
@@ -69,12 +86,12 @@ public class RoomSpawner : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D other){
-        if(other.CompareTag("SpawnPoint")){
-            if(other.GetComponent<RoomSpawner>().spawned == false && spawned == false){
-                Instantiate(templates.closedRoom, gameObject.transform.position, Quaternion.identity);
-                Destroy(gameObject);
-            }
-            spawned = true;
-        }
-    }
+		if(other.CompareTag("SpawnPoint")){
+			if(other.GetComponent<RoomSpawner>().spawned == false && spawned == false){
+				CreateRoom(templates.closedRoom, transform.position, Quaternion.identity);
+				Destroy(gameObject);
+			} 
+			spawned = true;
+		}
+	}
 }
