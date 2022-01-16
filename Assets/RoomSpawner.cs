@@ -19,7 +19,7 @@ public class RoomSpawner : MonoBehaviour
     {
         templates = GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomTemplates>();
         
-        Invoke("Spawn", 2f);
+        Invoke("Spawn", 0.5f);
         Camera.main.orthographicSize += 1;
     }
 
