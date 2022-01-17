@@ -21,6 +21,7 @@ public class RoomSpawner : MonoBehaviour
         
         Invoke("Spawn", 0.5f);
         Camera.main.orthographicSize += 1;
+        
     }
 
     // Update is called once per frame
@@ -63,6 +64,7 @@ public class RoomSpawner : MonoBehaviour
 
     void CreateRoom(GameObject room, Vector3 pos, Quaternion rotation){
         GameObject pissballs = Instantiate(room, pos, rotation);
+        templates.timeSinceSpawn = 0;
         int count = pissballs.transform.childCount;
         // print(pissballs.transform);
         int spriteIndex = Random.Range(0, templates.sprites.Length);
