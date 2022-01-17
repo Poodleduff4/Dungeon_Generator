@@ -191,12 +191,17 @@ MonoBehaviour:
   - {fileID: 6762898730360127679, guid: 4435ae0deac811841a15c00824ea456c, type: 3}
   - {fileID: 4856728669378256113, guid: 242b22fe687b95d439c66a73f9b39d44, type: 3}
   closedRoom: {fileID: 1586528034238900, guid: b2b19e11d48c5cb4daee27875e9d4db8, type: 3}
+  rooms: []
   sprites:
   - {fileID: 21300000, guid: 805fba050a895214cbddc3743cdc98eb, type: 3}
   - {fileID: 21300000, guid: 3d73f19771724e946b364f5908337b4d, type: 3}
   mats:
   - {fileID: 2100000, guid: 42b55a84e2a5bbc4f8c2ea801b6b2fc7, type: 2}
   - {fileID: 2100000, guid: ce9a20b4698eaf24da3384194f2429c4, type: 2}
+  player: {fileID: 6233394114653201234, guid: 4a2ed92cb7e9e1042bc12478350ec350, type: 3}
+  boss: {fileID: 2767478683316481602, guid: e783a89ac289250418743d14f27994a7, type: 3}
+  bossSpawned: 0
+  timeSinceSpawn: 0
 --- !u!4 &238888847
 Transform:
   m_ObjectHideFlags: 0
