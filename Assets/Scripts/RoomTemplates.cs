@@ -16,6 +16,7 @@ public class RoomTemplates : MonoBehaviour
     public GameObject boss;
     public bool bossSpawned = false;
     public float timeSinceSpawn;
+    public int found = 1;
 
     void Start(){
         Instantiate(player, rooms[0].transform.position, rooms[0].transform.rotation);

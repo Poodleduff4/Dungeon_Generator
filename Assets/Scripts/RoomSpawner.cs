@@ -7,7 +7,7 @@ public class RoomSpawner : MonoBehaviour
     public int openingDirection;
     private RoomTemplates templates;
     private int rand;
-    private bool spawned = false;
+    public bool spawned = false;
 
     // 1 --> top door
     // 2 --> bottom door
@@ -82,7 +82,7 @@ public class RoomSpawner : MonoBehaviour
     int randNumPreferHigh(int low, int high){
         int rand = Random.Range(0, high);
         if(rand == 0){
-            rand = Random.Range(0, high);
+            // rand = Random.Range(0, high);
         }
         return rand;
     }

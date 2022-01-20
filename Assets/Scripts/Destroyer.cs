@@ -6,7 +6,8 @@ public class Destroyer : MonoBehaviour
 {
     void OnTriggerEnter2D(Collider2D other){
         if(other.gameObject.tag != "Player"){
-            Destroy(other.gameObject);
+            // Destroy(other.gameObject);     Destroys spawnpoints into the entry room so can't move thru it
+            other.GetComponent<RoomSpawner>().spawned = true;
         }
         
     }
