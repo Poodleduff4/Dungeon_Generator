@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MapView : MonoBehaviour
+public class RoomView : MonoBehaviour
 {
     private RoomTemplates templates;
     // Start is called before the first frame update
@@ -11,15 +11,15 @@ public class MapView : MonoBehaviour
     {
         templates = GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomTemplates>();
         // print(templates.found);
-        // Camera.main.
     }
 
     // Update is called once per frame
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.X)){
-            print("Map");
-            SceneManager.LoadScene(sceneName:"Main");
+            // templates.currentRoom = 
+            print("Room");
+            SceneManager.LoadScene(sceneName:"Room View", LoadSceneMode.Additive);
         }
     }
 }

@@ -18,10 +18,20 @@ public class RoomSpawner : MonoBehaviour
     void Start()
     {
         templates = GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomTemplates>();
-        
-        Invoke("Spawn", 0.5f);
-        Camera.main.orthographicSize += 1;
-        
+        if (!templates.done)
+        {
+            Invoke("Spawn", 0.5f);
+            Camera.main.orthographicSize += 1;
+        }
+        else
+        {
+            // for(int i = 0;i < templates.rooms.Count;i++){
+            //     GameObject room = templates.rooms[i];
+            //     Instantiate(room, room.transform.position, room.transform.rotation);
+                
+            // }
+        }
+
     }
 
     // Update is called once per frame
@@ -62,38 +72,46 @@ public class RoomSpawner : MonoBehaviour
 
     }
 
-    void CreateRoom(GameObject room, Vector3 pos, Quaternion rotation){
+    void CreateRoom(GameObject room, Vector3 pos, Quaternion rotation)
+    {
         GameObject pissballs = Instantiate(room, pos, rotation);
         templates.timeSinceSpawn = 0;
         int count = pissballs.transform.childCount;
         // print(pissballs.transform);
         int spriteIndex = Random.Range(0, templates.sprites.Length);
         // print(spriteIndex);
-        foreach(Transform child in pissballs.GetComponentsInChildren<Transform>()){
+        foreach (Transform child in pissballs.GetComponentsInChildren<Transform>())
+        {
             // print("Foreach loop: " + child);
             GameObject obj = child.gameObject;
-            if(obj.tag == "Wall"){
+            if (obj.tag == "Wall")
+            {
                 child.GetComponent<SpriteRenderer>().sprite = templates.sprites[spriteIndex];
             }
         }
-        
+
     }
 
-    int randNumPreferHigh(int low, int high){
+    int randNumPreferHigh(int low, int high)
+    {
         int rand = Random.Range(0, high);
-        if(rand == 0){
+        if (rand == 0)
+        {
             // rand = Random.Range(0, high);
         }
         return rand;
     }
 
-    void OnTriggerEnter2D(Collider2D other){
-		if(other.CompareTag("SpawnPoint")){
-			if(other.GetComponent<RoomSpawner>().spawned == false && spawned == false){
-				CreateRoom(templates.closedRoom, transform.position, Quaternion.identity);
-				Destroy(gameObject);
-			} 
-			spawned = true;
-		}
-	}
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("SpawnPoint"))
+        {
+            if (other.GetComponent<RoomSpawner>().spawned == false && spawned == false)
+            {
+                CreateRoom(templates.closedRoom, transform.position, Quaternion.identity);
+                Destroy(gameObject);
+            }
+            spawned = true;
+        }
+    }
 }

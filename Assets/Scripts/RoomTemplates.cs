@@ -17,20 +17,23 @@ public class RoomTemplates : MonoBehaviour
     public bool bossSpawned = false;
     public float timeSinceSpawn;
     public int found = 1;
+    public GameObject currentRoom;
+    public bool done = false;
 
     void Start(){
-        Instantiate(player, rooms[0].transform.position, rooms[0].transform.rotation);
+        // Instantiate(player, new Vector3(0, 0, 0), Quaternion.identity);
+        // currentRoom = rooms[0];
     }
 
-    void FixedUpdate(){
-        timeSinceSpawn += Time.fixedDeltaTime;
-        if(timeSinceSpawn > 1 && !bossSpawned){
-            print("BOSS");
-            timeSinceSpawn = 0;
-            bossSpawned = true;
-            Instantiate(boss, rooms[rooms.Count-1].transform.position, rooms[rooms.Count-1].transform.rotation);
+    // void FixedUpdate(){
+    //     timeSinceSpawn += Time.fixedDeltaTime;
+    //     if(timeSinceSpawn > 1 && !bossSpawned){
+    //         print("BOSS");
+    //         timeSinceSpawn = 0;
+    //         bossSpawned = true;
+    //         Instantiate(boss, rooms[rooms.Count-1].transform.position, rooms[rooms.Count-1].transform.rotation);
+    //         done = true;
             
-        }
-    }
-
+    //     }
+    // }
 }

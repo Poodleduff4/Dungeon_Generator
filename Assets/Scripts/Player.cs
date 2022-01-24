@@ -5,19 +5,21 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     private RoomTemplates templates;
-    private GameObject currentRoom;
+    // private GameObject currentRoom;
     // Start is called before the first frame update
     void Start()
     {
         print("Player");
+        gameObject.tag = "Player";
         templates = GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomTemplates>();
+        // Instantiate(templates.player, transform.position, Quaternion.identity);
     }
 
     // Update is called once per frame
     void Update(){
         if(Input.GetKeyDown(KeyCode.Space)){
-            currentRoom = FindRoom(gameObject);
-            print(currentRoom);
+            templates.currentRoom = FindRoom(gameObject);
+            print(templates.currentRoom);
         }
         //1 has door facing the top, so to move into that room, we need to go down 1
         //2 --> room above
@@ -48,11 +50,7 @@ public class Player : MonoBehaviour
                 gameObject.transform.position = spawnPoints[i].transform.position;
             }
         }
-        currentRoom = FindRoom(gameObject);
-    }
-
-    void OnTriggerStay2D(Collider2D other){
-        print(other.gameObject);
+        templates.currentRoom = FindRoom(gameObject);
     }
 
     GameObject FindRoom(GameObject target){
